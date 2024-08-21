@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Hide overflow to avoid scrollbars */
+        }
+        #myVideo {
+            background-color: black;
+            opacity: 0.7;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            width: 1250px;
+            height: 740px;
+        }
+        #weather-container {
+            position: relative;
+
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.289); /* Slightly transparent background */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body style="background-color: black;">
+    <div style="background-color: #333;width: 280px;height: 680px;position: absolute;">
+
+    </div>
+    <video id="myVideo" muted autoplay playsinline>
+        <source src={{ url_for('static', filename="weather.mp4") }} type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    <div id="weather-container">
+        <h1>Weather Search</h1>
+        <form method="get" action="/maaz-weather">
+            <input type="text" name="query" placeholder="Enter location (e.g., London)" style="padding: 5px;border: none;width: 196px;height: 20px;border-radius: 3px;">
+            <button type="submit" style="border-radius: 4px;border: none;height: 30px;padding: 5px;">Search</button>
+        </form>
+        <div id="weather-info">
+            <h2>Weather in {{ location }}</h2>
+            <p>Temperature: {{ temperature }}°C</p>
+            <p>Condition: {{ condition }}</p>
+            <p>Latitude: {{ latitude }}</p>
+        </div>
+    </div>
+</body>
+<script>
+    // You can add JavaScript here for video controls or other functionality
+    // Example: Play/Pause video control
+    var video = document.getElementById("myVideo");
+    function myFunction() {
+        if (video.paused) {
+            video.play();
+            btn.innerHTML = "Pause";
+        } else {
+            video.pause();
+            btn.innerHTML = "Play";
+        }
+    }
+</script>
+</html>
